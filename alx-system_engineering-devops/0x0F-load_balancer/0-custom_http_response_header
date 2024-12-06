@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# configure server
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# index page creation on server
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# redirect permanently code 301
+new_content="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
+sudo sed -i "s/server_name _;/$new_content/" /etc/nginx/sites-enabled/default
+
+# error page code 404
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+new_content="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+#update content to be shown to the user
+sudo sed -i "s/listen 80 default_server;/$new_content/" /etc/nginx/sites-enabled/default
+
+# custom response header
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# verify syntax errors
+sudo nginx -t
+
+# reload nginx
+sudo service nginx restart
