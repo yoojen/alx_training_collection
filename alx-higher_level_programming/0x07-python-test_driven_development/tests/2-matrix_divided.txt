@@ -1,0 +1,61 @@
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+    >>> matrix = [
+    ...     [1, 2, 3],
+    ...     [4, 5, 6]
+    ... ]
+    >>> print(matrix_divided(matrix, 3))
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+    >>> matrix = [
+    ...     [3, 6, 9],
+    ...     [12, 15, 18]
+    ... ]
+    >>> print(matrix_divided(matrix, 3))
+    [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+
+
+    >>> matrix = [
+    ...     [1.1, -2.2, 6.3],
+    ...     [3.0, 5.5, -6.6]
+    ... ]
+    >>> print(matrix_divided(matrix, 3))
+    [[0.37, -0.73, 2.1], [1.0, 1.83, -2.2]]
+
+    >>> matrix = [
+    ...     [1, -2.2, 3, 4.4, 6],
+    ...     [-6.6, 9.00, 8, 6.999, 9.00]
+    ... ]
+    >>> print(matrix_divided(matrix, 3))
+    [[0.33, -0.73, 1.0, 1.47, 2.0], [-2.2, 3.0, 2.67, 2.33, 3.0]]
+
+invalid
+    >>> matrix = "not a list"
+    >>> print(matrix_divided(matrix, 3))
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+::
+
+    >>> matrix = None
+    >>> print(matrix_divided(matrix, 3))
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+empty list will raise the TypeError.
+
+    >>> matrix = []
+    >>> print(matrix_divided(matrix, 3))
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+    >>> matrix = [[]]
+    >>> print(matrix_divided(matrix, 3))
+    [[]]
+
+
+    >>> matrix = [1, 2, 3]
+    >>> print(matrix_divided(matrix, 3))
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+

@@ -1,0 +1,62 @@
+########## this file show how 0-add_integer with extension of py works############
+
+>>> add_integer = __import__('0-add_integer').add_integer
+
+----check if file is executable---
+>>> import os
+>>> os.access('0-add_integer.py', os.X_OK)
+True
+
+---check documentation oof module----
+>>> len(__import__('0-add_integer').__doc__) > 10
+True
+
+-----check documentation of function---
+>>> len(__import__("0-add_integer").add_integer.__doc__) > 10
+True
+
+---check for pep8 style---
+>>> os.popen("pycodestyle 0-add_integer.py").read()
+''
+
+---check for new line at the end of file---
+>>> os.popen("cat -e 0-add_integer.py | tail -1").read()[-1]
+'\n'
+
+--check for shebang(the starting exclamation mark with hash sign)--
+>>> os.popen("cat 0-add_integer.py | head -1").read()
+'#!/usr/bin/python3\n'
+
+---check if README file exists---
+>>> cwd = os.getcwd()
+>>> verify_readme = cwd + '/README.md'
+>>> os.path.exists(verify_readme)
+True
+
+-----test for 0-main.py----
+
+----check for correct output---
+>>> add_integer(1, 2)
+3
+
+---check for negative sign ----
+>>> add_integer(100, -2)
+98
+
+---check for one integer passed
+>>> add_integer(2)
+100
+
+---check for float number passed---
+>>> add_integer(100.3, -2)
+98
+
+>>> add_integer(2, 54.2)
+56
+
+>>> add_integer(-2.0, 4)
+2
+>>> add_integer(4, "School")
+Traceback (most recent call last):
+...
+TypeError: b must be an integer

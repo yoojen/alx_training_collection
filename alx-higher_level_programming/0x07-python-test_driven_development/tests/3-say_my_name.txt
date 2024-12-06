@@ -1,0 +1,59 @@
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+----check if file is executbale---
+
+>>> import os
+>>> os.access('3-say_my_name.py', os.X_OK)
+True
+
+-----check documentation of function---
+>>> len(__import__("3-say_my_name").say_my_name.__doc__) > 10
+True
+
+---check for pep8 style---
+>>> os.popen("pycodestyle 3-say_my_name.py").read()
+''
+
+---check for new line at the end of file---
+>>> os.popen("cat -e 3-say_my_name.py | tail -1").read()[-1]
+'\n'
+
+--check for shebang(the starting exclamation mark with hash sign)--
+>>> os.popen("cat 3-say_my_name.py | head -1").read()
+'#!/usr/bin/python3\n'
+
+---check if README file exists---
+#>>> cwd = os.getcwd()
+#>>> verify_readme = cwd + '/README.md'
+#>>> os.path.exists(verify_readme)
+#True
+
+-----test for 0-main.py----
+
+----check for correct output---
+>>> say_my_name("John", "Smith")
+My name is John Smith
+
+---check for negative sign ----
+>>> say_my_name("Walter", "White")
+My name is Walter White
+
+---check for one integer passed
+>>> say_my_name("Bob")
+My name is Bob 
+
+---check for float number passed---
+>>> say_my_name("Holly", -2)
+Traceback (most recent call last):
+...
+TypeError: last_name must be a string
+
+>>> say_my_name(2, "Holly")
+Traceback (most recent call last):
+...
+TypeError: first_name must be a string
+
+>>> say_my_name(None)
+Traceback (most recent call last):
+...
+TypeError: first_name must be a string
