@@ -1,3 +1,0 @@
-//find the matching name in collection
-
-db.school.find({name: "Holberton school"})
